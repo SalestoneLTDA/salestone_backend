@@ -62,7 +62,7 @@ public class OpenAiSummarizationService implements AiSummarizationService {
     @Override
     public String summarize(String conversationText) {
         try {
-            log.info("Requesting summary from OpenAI for conversation length: {}", conversationText.length());
+           
             
             String userPrompt = String.format(USER_PROMPT_TEMPLATE, conversationText);
             
@@ -86,11 +86,11 @@ public class OpenAiSummarizationService implements AiSummarizationService {
             if (response != null && response.choices() != null && !response.choices().isEmpty()) {
                 return response.choices().get(0).message().content();
             } else {
-                log.warn("OpenAI returned empty choices");
+              
                 return "Failed to generate summary: Empty response from AI.";
             }
         } catch (Exception e) {
-            log.error("Error calling OpenAI API", e);
+          
             return "Error generating summary: " + e.getMessage();
         }
     }

@@ -1,7 +1,11 @@
 package com.salestonetech.salestone.service.impl;
 
+
+
 import com.salestonetech.salestone.service.AiSummarizationService;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -35,7 +39,7 @@ public class MockAiSummarizationService implements AiSummarizationService {
     public String summarize(String conversationText) {
         String fullPrompt = String.format(PROMPT_TEMPLATE, conversationText);
         
-        log.info("Sending prompt to AI (Mock): \n{}", fullPrompt);
+    
         
         // Simulating AI response
         return """

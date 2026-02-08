@@ -17,7 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AdministratorController {
 
-    private final AdministratorService administratorService;
+    private final AdministratorService administratorService = null;
 
     @PostMapping
     public ResponseEntity<AdministratorResponseDTO> create(@Valid @RequestBody AdministratorRequestDTO request) {
