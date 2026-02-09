@@ -11,6 +11,8 @@ import java.util.UUID;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, UUID> {
     List<Message> findByConversationIdOrderByTimestampAsc(UUID conversationId);
+
+    List<Message> findByConversationIdAndTimestampBetweenOrderByTimestampAsc(UUID conversationId, LocalDateTime start, LocalDateTime end);
     
     List<Message> findByTimestampBetweenOrderByTimestampAsc(LocalDateTime start, LocalDateTime end);
 }

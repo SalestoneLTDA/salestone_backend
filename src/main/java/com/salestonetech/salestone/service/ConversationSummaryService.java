@@ -25,7 +25,13 @@ public class ConversationSummaryService {
         LocalDateTime start = request.getStartDate().atStartOfDay();
         LocalDateTime end = request.getEndDate().atTime(23, 59, 59);
 
-        List<Message> messages = messageRepository.findByTimestampBetweenOrderByTimestampAsc(start, end);
+        List<Message> messages;
+        if (request.getConversationId() != null) {
+            messages = messageRepository.findByConversationIdAndTimestampBetweenOrderByTimestampAsc(
+                    request.getConversationId(), start, end);
+        } else {
+            messages = messageRepository.findByTimestampBetweenOrderByTimestampAsc(start, end);
+        }
 
         if (messages.isEmpty()) {
             return SummaryResponseDTO.builder()
