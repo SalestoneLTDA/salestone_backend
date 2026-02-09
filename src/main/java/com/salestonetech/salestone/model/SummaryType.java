@@ -4,5 +4,6 @@ public enum SummaryType {
     DAILY,
     WEEKLY,
     QUARTERLY,
-    SEMIANNUAL
+    SEMIANNUAL,
+    CONVERSATION
 }

@@ -16,4 +16,6 @@ public class SummaryRequestDTO {
 
     @NotNull(message = "End date is required")
     private LocalDate endDate;
+
+    private java.util.UUID conversationId;
 }
