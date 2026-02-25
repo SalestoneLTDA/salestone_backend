@@ -13,6 +13,8 @@ import java.util.UUID;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, UUID> {
+
+    // Já estava correto, apenas confirmando a importância do OrderBy para o RAG
     List<Message> findByConversationIdOrderByTimestampAsc(UUID conversationId);
 
     List<Message> findByConversationIdAndTimestampBetweenOrderByTimestampAsc(UUID conversationId, LocalDateTime start, LocalDateTime end);
@@ -36,4 +38,11 @@ public interface MessageRepository extends JpaRepository<Message, UUID> {
     List<DateCountProjection> countMessagesByDateAndSalesperson(@Param("start") LocalDateTime start, 
                                                                 @Param("end") LocalDateTime end, 
                                                                 @Param("salespersonId") String salespersonId);
+
+    /**
+     * Útil para o Job de sábado caso queira processar apenas conversas
+     * que tiveram mensagens novas na última semana.
+     */
+    @Query("SELECT DISTINCT m.conversation.id FROM Message m WHERE m.timestamp >= :since")
+    List<UUID> findConversationIdsWithRecentMessages(@Param("since") LocalDateTime since);
 }
